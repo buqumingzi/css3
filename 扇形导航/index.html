@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var oBtn=true;
+				var iR=-150;
+				var oImg=$('#wrap').find('img');
+				
+				
+				//点击选择事件
+				$('#home').click(function(){
+					if(oBtn==true){
+						$(this).css('-webkit-transform','rotate(-720deg)');
+						$('#wrap').find('img').each(function(i){
+							var oLT=toLT(iR,90/($('#wrap img').length-1)*i);
+							oImg.eq(i).css('-webkit-transition',i*0.3+0.3+'s');
+							oImg.eq(i).css('left',oLT.l);
+							oImg.eq(i).css('top',oLT.t);
+							oImg.css('-webkit-transform','scale(1) rotate(-360deg)');
+						})
+					}
+					else{
+						$(this).css('-webkit-transform','rotate(0deg)');
+						oImg.each(function(i){
+							var I=($('#wrap img').length-1)-i;
+							oImg.eq(i).css('-webkit-transition',I*0.3+0.3+'s');
+							oImg.eq(i).css('left',0);
+							oImg.eq(i).css('top',0);
+							oImg.css('-webkit-transform','scale(1) rotate(0deg)');
+						})
+					}
+					oBtn=!oBtn;
+				});
+				
+				/*判断运动的距离*/
+				function toLT(iR,iDeg){
+					return {
+						l:Math.round(Math.sin(iDeg/180*Math.PI)*iR),
+						t:Math.round(Math.cos(iDeg/180*Math.PI)*iR)};
+				}
+				
+				//添加点击事件
+				/*oImg.click(function(){
+					$(this).css({'-webkit-transform':'scale(2)','opacity':'0.2'});
+					addEnd(oImg,function(){
+						oImg.$(this).css({'-webkit-transform':'scale(1)','opacity':'1'});
+					})
+				});*/
+				
+				
+				
+				/*$('#wrap').delegate('img','click',function(){
+					$(this).css({'-webkit-transform':'scale(2)','opacity':'0.2'});
+				});*/
+				
+				
+				
+				
+				oImg.hover(function(){
+					$(this).css({'-webkit-transform':'scale(1.3) rotate(-360deg)'});
+					
+				
+							
+					
+				},function(){
+					$(this).css({'-webkit-transform':'scale(1) rotate(-360deg)'});
+				});
+				
+				
+				
+				
+				
+				/*oImg.mousedown(function(){
+					$(this).css({'width':'60','height':'60'}).css('opacity','0.1');
+				});
+				oImg.mouseup(function(){
+					$(this).css({'width':'50','height':'50'}).css('opacity','1');
+				});*/
+				
+		
+			
+				
+			})
+			
+		
+		</script>
+		<style type="text/css">
+			#box{
+				position: fixed;
+				right: 20px;
+				bottom: 20px;
+				width: 50px;
+				height: 50px;
+			}
+			#wrap{
+				position: relative;
+				width: 42px;
+				height: 42px;
+				margin:4px;
+				
+			}
+			img,#home{
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				left: 0;
+				top: 0;
+				transition: 2s;
+			}
+			#home{
+				top: 4px;
+				left: 4px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="wrap">
+				<img src="img/水费.png"/>
+				<img src="img/燃气费.png"/>
+				<img src="img/电费.png"/>
+				<img src="img/贷款.png"/>
+				<img src="img/随意存.png"/>
+			</div>
+			<img id="home" src="img/更多.png"/>
+		</div>
+	</body>
+</html>
