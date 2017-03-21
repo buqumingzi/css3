@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var oP=$('#pro');
+				var oN=$('#next');
+				var oImg=$('#pic').find('img')
+				
+				
+				var num=0;
+				oImg.attr('class','hide').eq(0).attr('class','show');
+			/*	$('#pic').find('img').eq(0).attr('class','show').siblings().attr('class','hide');*/
+				
+				oN.click(function(){
+					
+					if(num>=oImg.length-1){
+						num=0;
+					}else{
+						num++;
+					}
+					oImg.eq(num).attr('class','show').siblings().attr('class','hide');
+					/*if(num >= $('#pic').find('img').length){
+						num=0;
+					}else{
+						num++;
+					}
+				*/
+				});
+
+				oP.click(function(){
+					
+					if(num<=0){
+						num=oImg.length-1;
+					}else{
+						num--;
+					}
+					oImg.eq(num).attr('class','show').siblings().attr('class','hide');
+				})
+				
+				
+			})
+		</script>
+		<style type="text/css">
+			#wrap{
+				position: relative;
+				width: 400px;
+				height: 300px;
+				margin:  100px auto;
+				-webkit-perspective: 800px;
+			}
+			input{
+				position: absolute;
+			}
+			#wrap input:first-child{
+				top: 150px;
+				left: -80px;
+			}
+			#wrap input:last-child{
+				top: 150px;
+				left: 420px;
+			}
+			#pic{
+				position: relative;
+				width: 400px;
+				height: 300px;
+				-webkit-transform-style: preserve-3d;	
+			}
+			#pic img{
+				position: absolute;
+				width: 400px;
+				height: 300px;
+				-webkit-transform-origin: bottom;
+				transition: 2s;
+			}
+			
+			
+			@-webkit-keyframes show{
+				0%{
+					-webkit-transform: rotateX(180deg);
+					opacity: 0;
+				}
+				50%{
+					-webkit-transform: rotateX(-10deg);
+					opacity: 0.8;
+				}
+				100%{
+					-webkit-transform: rotateX(0deg);
+					opacity: 1;
+				}
+			}
+			@-webkit-keyframes hide{
+				0%{
+					-webkit-transform: rotateX(0deg);
+					opacity: 1;
+				}
+				100%{
+					-webkit-transform: rotateX(-180deg);
+					opacity: 0;
+				}
+			}
+			.show{
+				-webkit-transform: rotateX(0deg);
+				opacity: 1;
+				-webkit-animation: 2s show;
+			}
+			.hide{
+				-webkit-transform: rotateX(180deg);
+				opacity: 0;
+				-webkit-animation: 1s hide;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<input id="pro" type="button" value="上一张" />
+			<div id="pic">
+				<img src="img/1.jpg"/>
+				<img src="img/2.jpg"/>
+				<img src="img/3.jpg"/>
+				<img src="img/4.jpg"/>
+				<img src="img/5.jpg"/>
+			</div>
+			<input id="next" type="button" value="下一张" />
+		</div>
+	</body>
+</html>
